@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount userfs on /app
+After=dev-disk-by\x2dlabel-userfs.device
+Requires=dev-disk-by\x2dlabel-userfs.device
+
+[Mount]
+What=/dev/disk/by-label/userfs
+Where=/app
+Type=ext4
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target

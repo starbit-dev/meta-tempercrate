@@ -1,0 +1,12 @@
+[Unit]
+Description=Mark current RAUC slot as good
+After=multi-user.target
+Wants=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/tempercrate-rauc-mark-good.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

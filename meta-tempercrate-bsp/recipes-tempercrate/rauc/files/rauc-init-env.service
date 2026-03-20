@@ -1,0 +1,13 @@
+[Unit]
+Description=Initialize RAUC U-Boot environment variables
+DefaultDependencies=no
+After=local-fs.target
+Before=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rauc-init-env.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

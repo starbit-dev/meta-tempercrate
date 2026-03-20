@@ -1,0 +1,14 @@
+[Unit]
+Description=Unmount legacy /usr/local mount
+DefaultDependencies=no
+After=local-fs.target app.mount
+Requires=app.mount
+ConditionPathIsMountPoint=/usr/local
+
+[Service]
+Type=oneshot
+ExecStart=/bin/umount /usr/local
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
