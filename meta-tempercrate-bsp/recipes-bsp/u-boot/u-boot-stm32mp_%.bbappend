@@ -12,7 +12,7 @@ python do_patch:append() {
         insert_block = [
             '\t"rauc_slot_a_part=8\\0" \\\n',
             '\t"rauc_slot_b_part=a\\0" \\\n',
-            '\t"rauc_default_left=3\\0" \\\n',
+            '\t"rauc_default_left=1\\0" \\\n',
             '\t"rauc_boot=echo RAUC boot ${rauc_slot} from mmc ${devnum}:${distro_bootpart}; sysboot mmc ${devnum}:${distro_bootpart} any ${scriptaddr} /extlinux/extlinux.conf\\0" \\\n',
             '\t"rauc_init=setenv devnum ${boot_instance}; test -n \\"${BOOT_ORDER}\\" || setenv BOOT_ORDER \\"A B\\"; test -n \\"${BOOT_A_LEFT}\\" || setenv BOOT_A_LEFT ${rauc_default_left}; test -n \\"${BOOT_B_LEFT}\\" || setenv BOOT_B_LEFT ${rauc_default_left}\\0" \\\n',
             '\t"rauc_try_A=if test ${BOOT_A_LEFT} -gt 0; then setexpr BOOT_A_LEFT ${BOOT_A_LEFT} - 1; setenv distro_bootpart ${rauc_slot_a_part}; setenv rauc_slot A; saveenv; run rauc_boot; fi\\0" \\\n',

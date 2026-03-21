@@ -14,7 +14,7 @@ boot_a_left="$(fw_printenv -n BOOT_A_LEFT 2>/dev/null || true)"
 boot_b_left="$(fw_printenv -n BOOT_B_LEFT 2>/dev/null || true)"
 
 [ -n "$boot_order" ] || fw_setenv BOOT_ORDER "A B"
-[ -n "$boot_a_left" ] || fw_setenv BOOT_A_LEFT 3
-[ -n "$boot_b_left" ] || fw_setenv BOOT_B_LEFT 3
+[ -n "$boot_a_left" ] || fw_setenv BOOT_A_LEFT 1
+[ -n "$boot_b_left" ] || fw_setenv BOOT_B_LEFT 1
 
 exit 0
