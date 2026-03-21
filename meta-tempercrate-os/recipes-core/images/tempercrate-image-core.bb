@@ -3,6 +3,10 @@ LICENSE = "MIT"
 require recipes-st/images/st-image-core.bb
 inherit tempercrate-secureboot
 
+# ST adds st-hostname in the base image and its service appends the MAC
+# address to /etc/hostname at boot. Remove it to keep the static hostname.
+CORE_IMAGE_EXTRA_INSTALL:remove = "st-hostname"
+
 # Add EVSE required package to core image
 IMAGE_INSTALL:append = " packagegroup-tempercrate-evse"
 

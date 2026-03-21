@@ -1,5 +1,5 @@
 # Set system hostname
-hostname = "home2"
+hostname = "temper-crate-os"
 
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"

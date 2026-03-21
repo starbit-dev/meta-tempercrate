@@ -20,7 +20,7 @@
 # certificate extensions.
 #
 # Usage:
-#   cd /mnt/yocto/Home2/home2-workdir/build/tempercratelinux-stm32mp13-tempercrate-dev
+#   cd /mnt/yocto/TemperCrateOS/tempercrate-workdir/build/tempercratelinux-stm32mp13-tempercrate-dev
 #   ../../layers/meta-tempercrate/meta-tempercrate-os/scripts/check_fip_signed.sh
 #
 # Optional environment:
@@ -50,7 +50,7 @@ Usage:
 Run this script from a Yocto build directory.
 
 Examples:
-  cd /mnt/yocto/Home2/home2-workdir/build/tempercratelinux-stm32mp13-tempercrate-dev
+  cd /mnt/yocto/TemperCrateOS/tempercrate-workdir/build/tempercratelinux-stm32mp13-tempercrate-dev
   ../../layers/meta-tempercrate/meta-tempercrate-os/scripts/check_fip_signed.sh
 
 Optional environment:

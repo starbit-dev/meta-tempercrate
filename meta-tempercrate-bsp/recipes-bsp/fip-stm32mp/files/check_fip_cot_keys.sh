@@ -54,7 +54,7 @@ detect_secure_boot_repo() {
     current_dir="$(pwd)"
 
     # Typical invocation during Yocto build:
-    #   <home2-workdir>/build/tempercratelinux-*/...
+    #   <tempercrate-workdir>/build/tempercratelinux-*/...
     candidate="$(cd "${current_dir}/../.." 2>/dev/null && pwd)/tempercrate-secure-boot"
     if [[ -d "${candidate}" ]]; then
         printf '%s\n' "${candidate}"

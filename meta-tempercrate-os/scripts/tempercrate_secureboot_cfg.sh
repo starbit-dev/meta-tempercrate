@@ -111,7 +111,7 @@ _tempercrate_sb_reset_env
 
 # Priority:
 # 1. SECURE_BOOT_CONFIG_PATH already exported by caller (advanced override)
-# 2. auto-detect from current workspace layout: <home2-workdir>/tempercrate-secure-boot
+# 2. auto-detect from current workspace layout: <tempercrate>/tempercrate-secure-boot
 if [[ -z "${SECURE_BOOT_CONFIG_PATH:-}" ]]; then
     if detected_path="$(_tempercrate_sb_detect_default_config_path)"; then
         export SECURE_BOOT_CONFIG_PATH="${detected_path}"
