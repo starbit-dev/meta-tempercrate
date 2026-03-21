@@ -76,11 +76,11 @@ create_tempercrate_image_stamp() {
 
     # Basic image/build info
     {
-        echo "Image             : ${PN}"
-        echo "Machine           : ${MACHINE}"
-        echo "Build             : ${DATETIME}"
+        echo "Image                    : ${PN}"
+        echo "Machine                  : ${MACHINE}"
+        echo "Build                    : ${DATETIME}"
         echo "meta-tempercrate-repo    : ${TEMPERCRATE_REPO}"
-        echo "Distro            : ${DISTRO} ${DISTRO_VERSION}"
+        echo "Distro                   : ${DISTRO} ${DISTRO_VERSION}"
         echo "meta-tempercrate-branch  : ${BRANCH}"
         echo "meta-tempercrate-tag     : ${TAG}"
         echo "meta-tempercrate-commit  : ${COMMIT}"
