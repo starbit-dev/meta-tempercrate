@@ -1,11 +1,11 @@
 [Unit]
-Description=Mount userfs on /app
+Description=Mount userfs on /datafs
 After=dev-disk-by\x2dlabel-userfs.device
 Requires=dev-disk-by\x2dlabel-userfs.device
 
 [Mount]
 What=/dev/disk/by-label/userfs
-Where=/app
+Where=/datafs
 Type=ext4
 Options=defaults
 

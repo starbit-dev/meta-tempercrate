@@ -1,8 +1,8 @@
 [Unit]
 Description=Unmount legacy /usr/local mount
 DefaultDependencies=no
-After=local-fs.target app.mount
-Requires=app.mount
+After=local-fs.target datafs.mount
+Requires=datafs.mount
 ConditionPathIsMountPoint=/usr/local
 
 [Service]

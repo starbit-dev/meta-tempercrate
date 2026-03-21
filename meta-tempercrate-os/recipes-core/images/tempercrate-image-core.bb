@@ -94,7 +94,7 @@ create_tempercrate_image_stamp() {
 do_image_complete[depends] += "tempercrate-userfs-ext4:do_deploy"
 
 # Remove any legacy /usr/local mount entries from the generated fstab.
-# userfs is now mounted on /app via a systemd mount unit.
+# userfs is now mounted on /datafs via a systemd mount unit.
 ROOTFS_POSTPROCESS_COMMAND += "remove_usr_local_from_fstab; "
 
 remove_usr_local_from_fstab() {
@@ -104,7 +104,7 @@ remove_usr_local_from_fstab() {
 }
 
 # Drop /usr/local from the rootfs to prevent it being reused as a mountpoint.
-# The application filesystem is now exposed exclusively at /app.
+# The application filesystem is now exposed exclusively at /datafs.
 ROOTFS_POSTPROCESS_COMMAND += "remove_usr_local; "
 
 remove_usr_local() {
