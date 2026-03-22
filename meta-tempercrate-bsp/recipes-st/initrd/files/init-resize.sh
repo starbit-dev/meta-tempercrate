@@ -10,8 +10,7 @@ resize_run() {
     ln -s /proc/mounts /etc/mtab
 
     if [ -n "$ROOTFS_DIR" ]; then
-        if [ ! -e $ROOTFS_DIR/etc/.resized ]
-        then
+        if [ ! -e "$ROOTFS_DIR/etc/.resized" ]; then
             # check command line to know storage device used
             if [ -n "$bootparam_root" ]; then
                 debug "No e2fs compatible filesystem has been mounted, mounting $bootparam_root..."
@@ -37,15 +36,14 @@ resize_run() {
                     USERFS_EXPANDED=0
                     USERFS_DEVICE=""
 
-                    for i in 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20;
-                    do
+                    for i in 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
                         DEVICE="/dev/mmcblk"$j"p"$i
                         if [ -e "$DEVICE" ]; then
                             label=$(/sbin/e2label "$DEVICE" 2> /dev/null)
                             if [ $? -eq 0 ]; then
                                 case $label in
                                 user*)
-                                    echo "RESIZE USERFS [$DEVICE]"
+                                    echo "CHECK USERFS [$DEVICE]"
 
                                     PART="$DEVICE"
                                     PARTNUM="$(echo "$PART" | sed -n 's/.*p\([0-9]\+\)$/\1/p')"
@@ -66,10 +64,29 @@ resize_run() {
                                         sleep 2
                                     fi
 
-                                    /sbin/e2fsck -f -y -c -C 0 "$DEVICE" && /sbin/resize2fs "$DEVICE"
+                                    FS_BLOCKS=$(dumpe2fs -h "$DEVICE" 2>/dev/null | awk '/Block count:/ {print $3}')
+                                    PART_SIZE=$(blockdev --getsize64 "$DEVICE" 2>/dev/null)
+                                    PART_BLOCKS=$((PART_SIZE / 1024))
 
-                                    USERFS_EXPANDED=1
-                                    USERFS_DEVICE="$DEVICE"
+                                    if [ -z "$FS_BLOCKS" ] || [ -z "$PART_SIZE" ] || [ "$PART_SIZE" -le 0 ]; then
+                                        echo "USERFS size detection failed, forcing resize [$DEVICE]"
+                                        DO_RESIZE=1
+                                    elif [ "$FS_BLOCKS" -lt "$PART_BLOCKS" ]; then
+                                        DO_RESIZE=1
+                                    else
+                                        DO_RESIZE=0
+                                    fi
+
+                                    if [ "$DO_RESIZE" -eq 1 ]; then
+                                        echo "RESIZE USERFS [$DEVICE]"
+                                        /sbin/e2fsck -f -y "$DEVICE" || true
+                                        /sbin/resize2fs "$DEVICE"
+
+                                        USERFS_EXPANDED=1
+                                        USERFS_DEVICE="$DEVICE"
+                                    else
+                                        echo "USERFS already full size, skipping resize [$DEVICE]"
+                                    fi
                                     ;;
                                 root*)
                                     echo "RESIZE ROOTFS [$DEVICE]"
